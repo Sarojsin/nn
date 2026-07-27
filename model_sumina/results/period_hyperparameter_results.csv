@@ -1,0 +1,7 @@
+Model,Best Score,Best Parameters
+Decision Tree,-1.7098424777145695,"{'min_samples_split': 5, 'min_samples_leaf': 2, 'max_depth': 3}"
+Random Forest,-1.7109220154545013,"{'n_estimators': 100, 'min_samples_split': 2, 'min_samples_leaf': 2, 'max_depth': None}"
+KNN,-1.7513779600902353,"{'weights': 'uniform', 'p': 1, 'n_neighbors': 11}"
+SVR,-1.7372885251412646,"{'kernel': 'rbf', 'gamma': 'scale', 'C': 0.1}"
+Gradient Boosting,-1.7095204230041532,"{'n_estimators': 100, 'max_depth': 3, 'learning_rate': 0.01}"
+XGBoost,-1.7098565512155623,"{'subsample': 1.0, 'n_estimators': 200, 'min_child_weight': 3, 'max_depth': 3, 'learning_rate': 0.01, 'gamma': 0.3, 'colsample_bytree': 1.0}"
