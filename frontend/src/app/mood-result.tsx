@@ -1,0 +1,13 @@
+import React from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import BottomNavigation from "../components/navigation/BottomNavigation";
+import PrimaryButton from "../components/buttons/PrimaryButton";
+import Colors from "../constants/colors";
+import { getMoodConfiguration } from "../features/mood/moodRepository";
+import { useMoodHistory } from "../features/mood/MoodHistoryContext";
+
+export default function MoodResultScreen() { const router = useRouter(); const { logMood } = useMoodHistory(); const { mood } = useLocalSearchParams<{ mood?: string }>(); const config = getMoodConfiguration(mood); const openActivity = () => config.activity === "journal" ? router.push(`/journal-editor?mood=${config.id}&source=mood`) : router.push(`/mood-activity?mood=${config.id}&activity=${config.activity}`); const skipActivity = () => { logMood(config.id); router.replace("/dashboard"); }; return <SafeAreaView style={[styles.screen, { backgroundColor: config.color }]} edges={["top"]}><View style={styles.content}><Text style={styles.emoji}>{config.emoji}</Text><Text style={styles.kicker}>FEELING {config.label.toUpperCase()}</Text><Text style={styles.quote}>“{config.quote}”</Text><PrimaryButton title={config.activityLabel} onPress={openActivity} style={styles.button} /><Pressable accessibilityRole="button" onPress={skipActivity}><Text style={styles.home}>Back to Home</Text></Pressable></View><BottomNavigation activeTab="Mood" /></SafeAreaView>; }
+const styles = StyleSheet.create({ screen: { flex: 1 }, content: { flex: 1, alignItems: "center", justifyContent: "center", paddingHorizontal: 27, paddingBottom: 100 }, emoji: { fontSize: 58 }, kicker: { marginTop: 20, color: "#FF6C72", fontSize: 17, letterSpacing: 1 }, quote: { marginTop: 47, color: Colors.darkPurple, fontSize: 27, lineHeight: 40, textAlign: "center" }, button: { alignSelf: "stretch", marginTop: 72 }, home: { marginTop: 33, color: "#A277C5", fontSize: 17, fontWeight: "600" }, });
